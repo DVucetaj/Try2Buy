@@ -37,7 +37,7 @@ passport.use('local-signup', new LocalStrategy({
             })
           }
         })
-        .then(createdUser => {
+        .then(createdUser => { console.log('Created User')
           done(null, createdUser)
         })
         .catch(done);

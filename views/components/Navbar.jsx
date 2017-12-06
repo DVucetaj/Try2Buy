@@ -39,7 +39,7 @@ export default class Navigation extends React.Component {
 	          <div id="top-links" className="nav pull-right flip">
 	            <ul>
 	              <li><a href="login.html">Login</a></li>
-	              <li><a href="register.html">Register</a></li>
+	              <li><Link to="/signup">Register</Link></li>
 	            </ul>
 	          </div>
 	        </div>
