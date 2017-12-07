@@ -9,6 +9,7 @@ import Cart from '../containers/Cart'
 import Products from '../containers/Products'
 import Category from '../containers/Category'
 import Signup from '../containers/Signup'
+import Login from '../containers/Login'
 
 const App = () => (
   <div className="wrapper-wide">
