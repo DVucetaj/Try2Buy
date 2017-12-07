@@ -39,7 +39,7 @@ export default class Login extends React.Component {
   	 		console.log('Invalid User')
   	 	}else{
   	 		//change header
-        this.state.setState({isLoggedIn: true})
+        this.setState({isLoggedIn: true})
   	 	}
   	 })
 
