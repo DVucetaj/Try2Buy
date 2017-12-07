@@ -7,11 +7,6 @@ const Categories = models.Categories;
 const Carts = models.Carts;
 const CartDetails = models.CartDetails;
 
-
-var updateTotal = function(req, res, next){
-  products.Products
-}
-
 router.get('/', (req,res,next) =>{
   return Carts.findOne({
     where: {id: req.query.UserId},
@@ -20,33 +15,16 @@ router.get('/', (req,res,next) =>{
     }]
   })
   .then(found =>{
-    parseInt(res.json(found));
-    // for(var i=0; i < parseInt(res.json(found.Products.length)); i++){
-    //
-    // }
+    res.json(found)
   })
   .then(() =>{
     res.sendStatus(200)
   })
   .catch(function(err){})
 })
-//
-// router.get('/', (req, res, next) => {
-//   //GET /api/cart?UserId=1
-//   return Carts.findOne({
-//     where: {
-//       UserId: req.query.UserId
-//     },
-//     include:
-//       [{model: Products}, {model: Users}]
-//   })
-//   .then(products =>{
-//     res.json(products);
-//   }).catch()
-// })
-
 
 /*
+for POSTMAN
 api/cart?UserId=[Desired User Cart]
 ProdcutId: ProductId
 OptionId: OptionId
@@ -54,18 +32,14 @@ quantity: quantity
 To remove items from cart, change quantity sent in to negative value
 quantity: -2
 */
- const userCart = function(req,res,next){
-   return Carts.findOne({
-     where:{UserId: req.query.UserId},
-     include: {
-       model: Products,
-       attributes: ['cost']
-     }
-   })
- }
 
 router.put('/', (req,res,next) => {
-  userCart(req,res,next)
+  return Carts.findOne({
+    where:{UserId: req.query.UserId},
+    include: {
+      model: Products
+    }
+  })
   .then(foundCart => {
     return CartDetails.findOrCreate({
       where:{
