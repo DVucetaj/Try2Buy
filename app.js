@@ -2,6 +2,7 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const models = require('./models')
 const passport = require('passport')
+const expressSession = require('express-session')
 var path = require('path')
 
 const PORT = process.env.PORT || 8000
@@ -14,6 +15,7 @@ app.use(bodyParser.json())
 
 app.use('/bin', express.static('./bin'));
 app.use(express.static(path.join(__dirname, '/public')))
+app.use(expressSession(({ secret: 'secret', resave: false, saveUninitialized: true })))
 app.use(passport.initialize())
 app.use(passport.session())
 
