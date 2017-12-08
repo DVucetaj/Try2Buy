@@ -1,22 +1,8 @@
 {
   "development": {
-    "username": "janizagesmundo",
-    "password": "Baruch52",
-    "database": "poll-development",
-    "host": "127.0.0.1",
-    "dialect": "postgresql"
-  },
-  "test": {
-    "username": "janizag",
-    "password": "Baruch52",
-    "database": "poll-development",
-    "host": "127.0.0.1",
-    "dialect": "postgresql"
-  },
-  "production": {
-    "username": "janizag",
-    "password": "Baruch52",
-    "database": "poll-development",
+    "username": "admin",
+    "password": "password",
+    "database": "t2b_dev",
     "host": "127.0.0.1",
     "dialect": "postgresql"
   }
