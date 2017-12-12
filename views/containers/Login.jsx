@@ -24,16 +24,16 @@ export default class Login extends React.Component {
   	this.setState({password: event.target.value})
   }
 
-  
- 
+
+
   login(event){
     event.preventDefault();
   	const userInfo = {
-  		email: this.state.email, 
-  		password: this.state.password 
+  		email: this.state.email,
+  		password: this.state.password
   	}
   	axios.post('/api/users/login', userInfo)
-  	 .then((user) => 
+  	 .then((user) =>
   	 {
   	 	if(!user){
   	 		console.log('Invalid User')
@@ -42,17 +42,23 @@ export default class Login extends React.Component {
         this.setState({isLoggedIn: true})
   	 	}
   	 })
+     .then(
+       console.log(userInfo, " / ", this.state.isLoggedIn)
+     )
+     .catch(function (error) {
+      console.log(error);
+     });
 
   }
 
   render(){
-  	console.log("this.state")
 
     if(this.state.isLoggedIn) {
       return <Redirect to="/" />
     }
 
     return(<div className="container">
+
 
     	 <form onSubmit={this.login}>
     	   <label >Email</label>

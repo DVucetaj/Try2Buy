@@ -14,10 +14,17 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.use('/bin', express.static('./bin'));
-app.use(express.static(path.join(__dirname, '/public')))
-app.use(expressSession(({ secret: 'secret', resave: false, saveUninitialized: true })))
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(express.static(path.join(__dirname, '/public')));
+app.use(expressSession({
+  secret: 'magicPassKey',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 5000
+  }
+}));
+app.use(passport.initialize());
+//app.use(passport.session());
 
 
 // Load up all of the controllers

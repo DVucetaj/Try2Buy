@@ -10,6 +10,7 @@ const Products = models.Products;
 const Carts = models.Carts;
 
 
+
 passport.serializeUser(function(user, done){
   done(null, user.id)
 })
@@ -20,9 +21,6 @@ passport.deserializeUser(function(id, done){
   })
 })
 
-/*****************************
-NEED TO LOWERCASE ALL EMAILS
-*****************************/
 passport.use('local-signup', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
@@ -38,7 +36,7 @@ passport.use('local-signup', new LocalStrategy({
             return done(null, false, { message: 'this email is already taken' })
           } else {
             return Users.create({
-              email: email,
+              email: email.toLowerCase(),
               password: password,
               isAdmin: req.body.isAdmin
             })
@@ -59,9 +57,6 @@ passport.use('local-signup', new LocalStrategy({
         .catch(done);
     })
   }))
-/*****************************
-NEED TO LOWERCASE ALL EMAILS
-*****************************/
 passport.use('local-login', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
@@ -95,13 +90,17 @@ router.post('/signup', passport.authenticate('local-signup', { successRedirect: 
 
 router.post('/login', passport.authenticate('local-login', {successRedirect: '/'}))
 
-//Delete User
+//DELETE USER
 //Deletes Cart associated with User
-
-
 router.delete('/', (req, res) =>{
-  Users.destroy({
+  return Users.findOne({
     where: {email: req.body.email}
+  })
+  .then((foundUser) => {
+    Carts.destroy({
+      where:{UserId: foundUser.id}
+    })
+    foundUser.destroy();
   })
   .then(() => {
     res.sendStatus(200)
@@ -110,7 +109,7 @@ router.delete('/', (req, res) =>{
     res.sendStatus(400);
   })
 });
-//returns OK but user remains in table
+
 
 
 

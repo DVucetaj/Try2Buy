@@ -25,15 +25,15 @@ export default class Signup extends React.Component {
   }
 
 
- 
+
   signup(event){
   	event.preventDefault();
   	const userInfo = {
-  		email: this.state.email, 
-  		password: this.state.password 
+  		email: this.state.email,
+  		password: this.state.password
   	}
   	axios.post('/api/users/signup', userInfo)
-  	 .then((user) => 
+  	 .then((user) =>
   	 {
   	 	if(!user){
   	 		console.log('Invalid User')
@@ -42,6 +42,9 @@ export default class Signup extends React.Component {
   	 		this.setState({isSignedUp: true})
   	 	}
   	 })
+     .catch(function (error) {
+      console.log(error);
+     });
 
   }
 
