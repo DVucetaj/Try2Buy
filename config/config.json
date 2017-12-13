@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "admin",
+    "password": "password",
+    "database": "t2b_dev",
+    "host": "127.0.0.1",
+    "dialect": "postgresql"
+  }
+}
