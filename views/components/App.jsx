@@ -8,8 +8,8 @@ import Product from '../containers/Product'
 import Cart from '../containers/Cart'
 import Products from '../containers/Products'
 import Category from '../containers/Category'
-import Signup from '../containers/Signup'
 import Login from '../containers/Login'
+import Checkout from '../containers/Checkout'
 
 const App = () => (
   <div className="wrapper-wide">
@@ -19,10 +19,10 @@ const App = () => (
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/products" component={Products} />
-        <Route path="/product" component={Product} /> 
-        <Route path="/cart" component={Cart} /> 
-        <Route path="/signup" component={Signup} /> 
-        <Route path="/login" component={Login} /> 
+        <Route path="/product" component={Product} />
+        <Route path="/cart" component={Cart} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login} />
       </Switch>
     </main>
 
