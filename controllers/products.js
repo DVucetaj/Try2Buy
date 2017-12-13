@@ -19,6 +19,15 @@ router.get('/', (req, res, next) => {
   )
 })
 
+//Used to get a single product
+router.get('/:id', (req, res, next) => {
+  //mustBeLoggedIn(req, res, next)
+  Products.findById(req.params.id)
+  .then(product =>
+    res.json(product)
+  )
+})
+
 
 //Used to create Products
 router.post('/', (req, res, next) =>{

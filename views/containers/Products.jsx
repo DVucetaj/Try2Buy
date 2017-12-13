@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Options from '../components/Options'
 import Card from '../components/Card'
+import {Link} from 'react-router-dom'
 
 export default class Products extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ export default class Products extends React.Component {
         <div className="container-fluid">
         {
         	this.state.products.map((product) => {
-        		return (<Card key={product.id} product={product} />)
+        		return (<Link to={`/products/${product.id}`}><Card key={product.id} product={product} /></Link>)
         	})
         }
         </div>
