@@ -6,8 +6,10 @@ export default class Navigation extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      categories: []
+      categories: [],
+      user: JSON.parse(window.localStorage.getItem('user'))
     }
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount(){
@@ -18,9 +20,25 @@ export default class Navigation extends React.Component {
       })
   }
 
+  logout() {
+  	window.localStorage.setItem("user", null)
+  }
+
 
 
  render() {
+ 	console.log("current user = ", this.state.user)
+ 	const authHeader = (<ul>
+	              <li><Link to='/login'>Login</Link></li>
+	              <li><Link to="/signup">Register</Link></li>
+	            </ul>)
+
+ 	const userHeader = (<ul>
+	              <li>{this.state.user.email.split('@')[0]}</li>
+	              <li onClick={this.logout}>Logout</li>
+	            </ul>)
+
+
   return (
       <div id="header" className="style2">
 	    <nav id="top" className="htop">
@@ -37,10 +55,9 @@ export default class Navigation extends React.Component {
 	            </div>
 	          </div>
 	          <div id="top-links" className="nav pull-right flip">
-	            <ul>
-	              <li><Link to='/login'>Login</Link></li>
-	              <li><Link to="/signup">Register</Link></li>
-	            </ul>
+	            {
+	            	(this.state.user !== null) ? {userHeader} : {authHeader}
+	            }
 	          </div>
 	        </div>
 	      </div>

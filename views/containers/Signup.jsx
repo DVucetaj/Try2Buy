@@ -7,8 +7,7 @@ export default class Signup extends React.Component {
   	super(props)
   	this.state = {
   		email: "",
-  		password: "",
-  		isSignedUp: false,
+  		password: ""
   	}
 
   	this.emailOnChange = this.emailOnChange.bind(this)
@@ -33,13 +32,26 @@ export default class Signup extends React.Component {
   		password: this.state.password
   	}
   	axios.post('/api/users/signup', userInfo)
-  	 .then((user) =>
+  	 .then((res) =>
   	 {
-  	 	if(!user){
+  	 	if(!res.data){
   	 		console.log('Invalid User')
   	 	}else{
   	 		//change header
-  	 		this.setState({isSignedUp: true})
+  	 		axios.post('/api/users/login', userInfo)
+		  	 .then((res) =>
+		  	 {
+		  	 	if(!res.data){
+		  	 		console.log('Invalid User')
+		  	 	}else{
+		       		window.localStorage.setItem('user', JSON.stringify(userInfo))
+		        	// console.log("user=", window.localStorage.getItem('user'))
+		        	this.props.history.push('/')
+		  	 	}
+		  	 })
+		     .catch(function (error) {
+		      console.log(error);
+     });
   	 	}
   	 })
      .catch(function (error) {
@@ -51,9 +63,7 @@ export default class Signup extends React.Component {
   render(){
   	console.log("this.state")
 
-  	if(this.state.isSignedUp) {
-  		return <Redirect to="/" />
-  	}
+  	
 
     return(<div className="container">
     	 <form onSubmit={this.signup}>
